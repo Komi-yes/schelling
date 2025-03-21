@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=TrafficLight
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ TrafficLight\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=city\ row\ column
+comment1.target=TrafficLight(City,\ int,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ TrafficLight\r\n
+comment2.params=
+comment2.target=java.awt.Color\ getColor()
+comment3.params=
+comment3.target=void\ decide()
+comment4.params=
+comment4.target=void\ change()
+numComments=5
