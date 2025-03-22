@@ -35,12 +35,16 @@ public class City{
         Walker kukuczka = new Walker(this,20,20);
         TrafficLight alarm = new TrafficLight(this,0,24);
         TrafficLight alert = new TrafficLight(this,0,0);
+        Building daniel = new Building(this,11,11);
+        Building JuanDavid = new Building(this,16,14)
         setItem(10,10,adan);
         setItem(15,15,eva);
         setItem(12,10,messner);
         setItem(20,20,kukuczka);
         setItem(0,24,alarm);
         setItem(0,0,alert);
+        setItem(11,11,daniel);
+        setItem(16,14,JuanDavid);
     }
     
     public int neighborsEquals(int r, int c){
@@ -71,6 +75,10 @@ public class City{
     public boolean isEmpty(int r, int c){
         return (inLocations(r,c) && locations[r][c]==null);
     }    
+
+    public Item[][] getLocations(){
+        return locations;
+    }
         
     private boolean inLocations(int r, int c){
         return ((0<=r) && (r<SIZE) && (0<=c) && (c<SIZE));
@@ -79,6 +87,7 @@ public class City{
    
     public void ticTac(){
         Item i;
+        List<Item> Buildings = new ArrayList<>();
         for (int r=0;r<SIZE;r++){
             for (int c=0;c<SIZE;c++){
                 if (locations[r][c] != null){
@@ -94,16 +103,24 @@ public class City{
                 if (locations[r][c] != null){
                     i = locations[r][c];
                     if (i.isActive()){
-                        i.change();
-                        if(i.getClass() == Walker.class){
-                            Walker walker = (Walker) i;
-                            if (!walker.isMoved()){
-                                walker.move(r,c);
+                        if (i.getClass() != Building.class){// si no es un Building que cambie de manera normal
+                            i.change();
+                            if(i.getClass() == Walker.class){
+                                Walker walker = (Walker) i;
+                                if (!walker.isMoved()){
+                                    walker.move(r,c);
+                                }
                             }
+                        }
+                        else if (i.getClass() == Building.class){// si es un Building que agregue el edificio a un arreglo
+                            Buildings.add(i);
                         }
                     }
                 }
             }
+        }
+        for(Item building : Buildings){
+            building.change();
         }
     }
 
