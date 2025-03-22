@@ -36,7 +36,7 @@ public class Walker extends Person
     public boolean isMoved(){
         return moved;
     }
-    public void move(int r,int c){
+    public void move(){
         boolean isEmpty = getCity().isEmpty(rowDestiny,columnDestiny);
         if (!isEmpty){
             state = Agent.DISSATISFIED;

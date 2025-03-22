@@ -36,7 +36,9 @@ public class City{
         TrafficLight alarm = new TrafficLight(this,0,24);
         TrafficLight alert = new TrafficLight(this,0,0);
         Building daniel = new Building(this,11,11);
-        Building JuanDavid = new Building(this,16,14);
+        Building JuanDavid = new Building(this,20,7);
+        AntisocialWalker palacios = new AntisocialWalker(this,14,14);
+        AntisocialWalker roa = new AntisocialWalker(this,25,20);
         setItem(10,10,adan);
         setItem(15,15,eva);
         setItem(12,10,messner);
@@ -44,7 +46,9 @@ public class City{
         setItem(0,24,alarm);
         setItem(0,0,alert);
         setItem(11,11,daniel);
-        setItem(16,14,JuanDavid);
+        setItem(20,7,JuanDavid);
+        setItem(14,14,palacios);
+        setItem(25,20,roa);
     }
     
     public int neighborsEquals(int r, int c){
@@ -59,6 +63,20 @@ public class City{
         }
         return num;
     }
+
+    public int personNeighbors(int r, int c){
+        int num=0;
+        if (inLocations(r,c) && locations[r][c]!=null){
+            for(int dr=-1; dr<2;dr++){
+                for (int dc=-1; dc<2;dc++){
+                    if ((dr!=0 || dc!=0) && inLocations(r+dr,c+dc) && 
+                    (locations[r+dr][c+dc]!=null) &&  (locations[r+dr][c+dc].getClass()== Person.class)) num++;
+                }
+            }
+        }
+        return num;
+    }
+
     public int neighbors(int r, int c){
         int num=0;
         if (inLocations(r,c) && locations[r][c]!=null){
@@ -80,7 +98,7 @@ public class City{
         return locations;
     }
         
-    private boolean inLocations(int r, int c){
+    public boolean inLocations(int r, int c){
         return ((0<=r) && (r<SIZE) && (0<=c) && (c<SIZE));
     }
     
@@ -105,10 +123,16 @@ public class City{
                     if (i.isActive()){
                         if (i.getClass() != Building.class){// si no es un Building que cambie de manera normal
                             i.change();
-                            if(i.getClass() == Walker.class){
+                            if(i.getClass() == Walker.class){//verifica si es Walker o AntisocialWalker
                                 Walker walker = (Walker) i;
                                 if (!walker.isMoved()){
-                                    walker.move(r,c);
+                                    walker.move();
+                                }
+                            }
+                            else if(i.getClass() == AntisocialWalker.class){
+                                AntisocialWalker walker = (AntisocialWalker) i;
+                                if (!walker.isMoved()){
+                                    walker.move();
                                 }
                             }
                         }
