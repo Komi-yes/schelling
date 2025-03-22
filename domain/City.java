@@ -36,7 +36,7 @@ public class City{
         TrafficLight alarm = new TrafficLight(this,0,24);
         TrafficLight alert = new TrafficLight(this,0,0);
         Building daniel = new Building(this,11,11);
-        Building JuanDavid = new Building(this,16,14)
+        Building JuanDavid = new Building(this,16,14);
         setItem(10,10,adan);
         setItem(15,15,eva);
         setItem(12,10,messner);
