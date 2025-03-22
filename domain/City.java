@@ -80,7 +80,7 @@ public class City{
         return locations;
     }
         
-    private boolean inLocations(int r, int c){
+    public boolean inLocations(int r, int c){
         return ((0<=r) && (r<SIZE) && (0<=c) && (c<SIZE));
     }
     
